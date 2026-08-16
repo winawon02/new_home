@@ -12,6 +12,7 @@
   const reviewCards = [...document.querySelectorAll('.review-card')];
   const reviewPrev = document.querySelector('[data-review-prev]');
   const reviewNext = document.querySelector('[data-review-next]');
+  const contactPanel = document.querySelector('[data-contact-panel]');
   const contactForm = document.querySelector('[data-contact-form]');
   const contactStatus = document.querySelector('[data-contact-status]');
 
@@ -88,6 +89,25 @@
     revealItems.forEach((item) => revealObserver.observe(item));
   } else {
     revealItems.forEach((item) => item.classList.add('is-visible'));
+  }
+
+  if (contactPanel) {
+    contactPanel.classList.add('is-collapsed');
+    const expandContactPanel = () => {
+      contactPanel.classList.remove('is-collapsed');
+      contactPanel.classList.add('is-expanded');
+    };
+
+    if ('IntersectionObserver' in window) {
+      const contactPanelObserver = new IntersectionObserver(([entry], observer) => {
+        if (!entry.isIntersecting) return;
+        window.setTimeout(expandContactPanel, 250);
+        observer.disconnect();
+      }, { rootMargin: '0px 0px -15%' });
+      contactPanelObserver.observe(contactPanel);
+    } else {
+      window.setTimeout(expandContactPanel, 250);
+    }
   }
 
   window.addEventListener('scroll', () => {
