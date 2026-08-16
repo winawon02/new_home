@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="위대한유산 무료 컨설팅 신청">
+  <meta name="theme-color" content="#f2f2eb">
+  <title>컨설팅 신청 | 위대한유산</title>
+  <link rel="icon" href="assets/images/favicon.png" type="image/png">
+  <link rel="stylesheet" href="styles.css">
+  <script src="script.js" defer></script>
+</head>
+<body class="contact-page">
+  <a class="skip-link" href="#contact-form">문의 폼으로 바로가기</a>
+
+  <header class="site-header" data-header>
+    <div class="site-header__inner container">
+      <a class="brand" href="index.html#top" aria-label="위대한유산 홈">
+        <img src="assets/images/test-logo.svg" data-logo alt="위대한유산">
+      </a>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-navigation">
+        <span></span><span></span><span></span><span></span>
+        <span class="sr-only">메뉴 열기</span>
+      </button>
+      <nav class="site-nav" id="site-navigation" aria-label="주요 메뉴">
+        <a href="https://class101.net/products/SZLCzfTDjW9v9QkLRdBZ" target="_blank" rel="noreferrer">클래스101</a>
+        <a href="assets/docs/company-introduction.pdf" download>회사소개서</a>
+        <a class="site-nav__cta" href="#contact-form">컨설팅 신청</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="contact-main">
+    <section class="contact-intro container" aria-labelledby="contact-title">
+      <p class="section-heading__point">LET'S WORK TOGETHER</p>
+      <h1 id="contact-title">바른 컨설팅이<br>만드는 <span>바른 결과</span></h1>
+      <p>현재 문의는 DB에 저장하지 않고 담당자 이메일로 바로 전달됩니다.</p>
+    </section>
+
+    <section class="container contact-form-wrap" id="contact-form">
+      <div class="contact-side">
+        <h2>컨설팅 신청서</h2>
+        <p>현재 사업 상황과 고민을 남겨주시면 확인 후 빠른 시일 내에 연락드리겠습니다.</p>
+        <p class="contact-side__note">입력하신 정보는 문의 응대 목적으로만 사용되며, 신청 완료 후 담당자 메일로 전송됩니다.</p>
+      </div>
+
+      <form class="contact-form" action="https://formsubmit.co/ajax/adverthere1@gmail.com" method="POST" data-contact-form>
+        <input type="hidden" name="_subject" value="[위대한유산] 무료 컨설팅 신청">
+        <input type="hidden" name="_template" value="table">
+        <input type="hidden" name="_captcha" value="false">
+        <input type="hidden" name="_url" value="https://winawon02.github.io/new_home/contact.html">
+        <input type="hidden" name="_replyto" value="">
+        <input type="text" name="_honey" tabindex="-1" autocomplete="off" style="display:none">
+
+        <fieldset class="form-fieldset">
+          <legend>문의 유형 <small>*</small></legend>
+          <div class="choice-list">
+            <label class="choice"><input type="radio" name="contactType" value="종합 마케팅" required><span>종합 마케팅</span></label>
+            <label class="choice"><input type="radio" name="contactType" value="바이럴 마케팅"><span>바이럴 마케팅</span></label>
+            <label class="choice"><input type="radio" name="contactType" value="퍼포먼스 마케팅"><span>퍼포먼스 마케팅</span></label>
+            <label class="choice"><input type="radio" name="contactType" value="기타 문의"><span>기타 문의</span></label>
+          </div>
+        </fieldset>
+
+        <fieldset class="form-fieldset">
+          <div class="form-grid">
+            <div class="form-field">
+              <label class="form-label" for="contact-company">회사명(업종) <small>*</small></label>
+              <input class="form-control" id="contact-company" name="contactCoop" type="text" placeholder="회사명 또는 업종을 입력해주세요" required>
+            </div>
+            <div class="form-field">
+              <label class="form-label" for="contact-name">담당자명 <small>*</small></label>
+              <input class="form-control" id="contact-name" name="contactNm" type="text" placeholder="이름을 입력해주세요" required>
+            </div>
+            <div class="form-field">
+              <label class="form-label" for="contact-tel">연락처 <small>*</small></label>
+              <input class="form-control" id="contact-tel" name="contactTel" type="tel" inputmode="tel" placeholder="010-0000-0000" required>
+            </div>
+            <div class="form-field">
+              <label class="form-label" for="contact-email">이메일 <small>*</small></label>
+              <input class="form-control" id="contact-email" name="email" type="email" placeholder="답변받을 이메일을 입력해주세요" required>
+            </div>
+          </div>
+        </fieldset>
+
+        <fieldset class="form-fieldset">
+          <legend>현재 마케팅 진행 여부</legend>
+          <div class="choice-list">
+            <label class="choice"><input type="radio" name="contactAd" value="진행 중"><span>진행 중</span></label>
+            <label class="choice"><input type="radio" name="contactAd" value="진행 전"><span>진행 전</span></label>
+            <label class="choice"><input type="radio" name="contactAd" value="중단 상태"><span>중단 상태</span></label>
+          </div>
+        </fieldset>
+
+        <div class="form-field form-field--full">
+          <label class="form-label" for="contact-budget">월 마케팅 예산</label>
+          <select class="form-control" id="contact-budget" name="contactBudget">
+            <option value="">선택해주세요</option>
+            <option value="월 100만원 미만">월 100만원 미만</option>
+            <option value="월 100~300만원">월 100~300만원</option>
+            <option value="월 300~500만원">월 300~500만원</option>
+            <option value="월 500만원 이상">월 500만원 이상</option>
+          </select>
+        </div>
+
+        <div class="form-field form-field--full">
+          <label class="form-label" for="contact-message">문의 내용 <small>*</small></label>
+          <textarea class="form-control form-control--memo" id="contact-message" name="contactMemo" maxlength="200" placeholder="문의하실 내용을 작성해주세요" required></textarea>
+        </div>
+
+        <label class="form-agree"><input type="checkbox" name="privacyConsent" value="동의" required><span>개인정보 수집 및 이용에 동의합니다. 입력한 정보는 문의 응대 목적으로만 사용됩니다.</span></label>
+        <div class="form-submit"><button class="round-button round-button--dark" type="submit"><i aria-hidden="true"></i>신청하기</button></div>
+        <p class="form-status" data-contact-status role="status" aria-live="polite"></p>
+      </form>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="site-footer__links"><a href="contact.html">광고문의</a><span>|</span><a href="contact.html">제휴문의</a><span>|</span><a href="contact.html">강의문의</a></div>
+      <p>주식회사 위대한유산 대표 : 이예진 <span>|</span> 사업자등록번호 : 881-81-02236 <span>|</span> 서울특별시 강남구 테헤란로82길 15, 1414호(대치동, 디아이타워) <span>|</span> <a href="mailto:adverthere1@gmail.com">adverthere1@gmail.com</a></p>
+      <p>Copyright © 2021 위대한유산 All rights reserved.</p>
+    </div>
+  </footer>
+</body>
+</html>

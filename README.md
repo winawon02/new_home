@@ -14,7 +14,11 @@ python3 -m http.server 5500
 
 ## 문의 연결
 
-현재 컨설팅 신청 버튼은 `adverthere1@gmail.com`으로 연결되는 `mailto:` 방식입니다. Google Sheets 수집 폼이나 외부 문의 서비스로 교체할 때는 `index.html`의 `#contact` 버튼 URL만 바꾸면 됩니다.
+`contact.html`의 컨설팅 신청 폼은 DB 없이 FormSubmit AJAX 엔드포인트로 `adverthere1@gmail.com`에 문의 내용을 전송합니다. 전송 응답이 성공이면 `success.html`로 이동하고, 실패하면 입력 화면에 오류를 표시합니다.
+
+처음 실제 문의를 받기 전에는 FormSubmit에서 수신 메일 주소 확인 절차를 한 번 완료해야 합니다. 수신 주소나 배포 도메인을 바꿀 때는 `contact.html`의 form `action`과 숨김 필드 `_url`도 함께 확인합니다.
+
+폼 전송은 `file://` 직접 열기보다 VSCode Live Server 또는 `python3 -m http.server 5500`처럼 HTTP 서버로 확인해야 합니다.
 
 ## 추출한 리소스
 

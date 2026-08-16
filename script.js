@@ -12,6 +12,8 @@
   const reviewCards = [...document.querySelectorAll('.review-card')];
   const reviewPrev = document.querySelector('[data-review-prev]');
   const reviewNext = document.querySelector('[data-review-next]');
+  const contactForm = document.querySelector('[data-contact-form]');
+  const contactStatus = document.querySelector('[data-contact-status]');
 
   const logoDark = 'assets/images/test-logo.svg';
   const logoLight = 'assets/images/logo-white.png';
@@ -35,6 +37,7 @@
   siteNav?.querySelectorAll('a').forEach((link) => link.addEventListener('click', closeMenu));
 
   const renderHero = (nextIndex) => {
+    if (!heroSlides.length) return;
     heroIndex = (nextIndex + heroSlides.length) % heroSlides.length;
     heroSlides.forEach((slide, index) => {
       const active = index === heroIndex;
@@ -91,6 +94,39 @@
     topButton?.classList.toggle('is-visible', window.scrollY > 500);
   }, { passive: true });
   topButton?.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+  contactForm?.addEventListener('submit', async (event) => {
+    event.preventDefault();
+    if (!contactForm.reportValidity()) return;
+
+    const submitButton = contactForm.querySelector('button[type="submit"]');
+    const formData = Object.fromEntries(new FormData(contactForm).entries());
+    formData._replyto = formData.email;
+    submitButton.disabled = true;
+    if (contactStatus) {
+      contactStatus.textContent = '문의 내용을 전송하고 있습니다.';
+      contactStatus.className = 'form-status is-loading';
+    }
+
+    try {
+      const response = await fetch(contactForm.action, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify(formData)
+      });
+      const result = await response.json().catch(() => ({}));
+      if (!response.ok || result.success === false || result.success === 'false') {
+        throw new Error(result.message || '문의 전송에 실패했습니다.');
+      }
+      window.location.href = 'success.html';
+    } catch (error) {
+      submitButton.disabled = false;
+      if (contactStatus) {
+        contactStatus.textContent = '전송에 실패했습니다. 잠시 후 다시 시도해주세요.';
+        contactStatus.className = 'form-status is-error';
+      }
+    }
+  });
 
   renderHero(0);
   renderReviews(0);
