@@ -48,7 +48,7 @@ img { display: block; max-width: 100%; }
 .hero { position: relative; overflow: hidden; padding-top: 80px; }
 .hero__inner { position: relative; display: grid; grid-template-columns: minmax(0, 1fr) minmax(360px, 550px); align-items: center; min-height: 720px; }
 .hero__copy { position: relative; z-index: 2; padding: 80px 0 40px; }
-.hero__slides { width: min(650px, 100%); overflow: hidden; }
+.hero__slides { width: min(650px, 100%); padding-bottom: 20px; overflow: hidden; }
 .hero-slide { display: none; animation: slide-in .45s ease both; }
 .hero-slide.is-active { display: block; }
 .hero__badge { display: flex; align-items: center; gap: 10px; margin-bottom: 20px; font: 500 32px/1.2 "Gmarket Sans", sans-serif; }
@@ -95,7 +95,7 @@ img { display: block; max-width: 100%; }
 .intro { position: sticky; top: 80px; z-index: 1; display: flex; min-height: calc(100vh - 80px); align-items: center; padding: 80px 0; }
 .section-heading--center { text-align: center; }
 .section-heading__point { margin: 0 0 20px; color: var(--red); font: 500 22px/1.3 "Gmarket Sans", sans-serif; }
-.section-heading h2 { margin: 0; font: 700 clamp(32px, 3.15vw, 44px)/1.25 "Gmarket Sans", sans-serif; letter-spacing: -.06em; }
+.section-heading h2 { position: relative; z-index: 1; margin: 0; font: 700 clamp(32px, 3.15vw, 44px)/1.25 "Gmarket Sans", sans-serif; letter-spacing: -.06em; }
 .section-heading h2 span { position: relative; display: inline-block; z-index: 0; }
 .section-heading h2 span::after { content: ""; position: absolute; z-index: -1; right: -10px; bottom: 0; left: -10px; height: 20px; background: #ffebb4; }
 .section-heading__copy { max-width: 600px; margin: 40px auto 0; font-size: 20px; line-height: 1.4; word-break: keep-all; }
@@ -109,17 +109,15 @@ img { display: block; max-width: 100%; }
 .talk-item em { font-style: normal; font-weight: 700; }
 
 .section--dark { position: relative; overflow: hidden; color: #fff; background: var(--ink); }
-.method { z-index: 2; min-height: 900px; padding: 0; }
-.method__inner { display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 900px; }
+.method { z-index: 2; min-height: 700px; height: 100vh; padding: 0; }
+.method__inner { display: flex; align-items: center; justify-content: center; height: 100%; min-height: 0; }
+.method__stack { width: 100%; text-align: center; }
 .section-heading--dark h2 { color: #fff; }
 .section-heading--dark h2 span::after { background: var(--red); }
 .section-heading--dark .section-heading__copy { color: #c8c8c8; font-weight: 300; }
-.method__line { position: absolute; left: 50%; width: 1px; height: 50vh; background: rgba(255, 255, 255, .2); transform: translateX(-50%); }
+.method__line { position: relative; width: 1px; height: 50vh; margin: 0 auto; background: rgba(255, 255, 255, .2); }
 .method__line span { position: absolute; bottom: 0; left: 50%; width: 16px; height: 16px; border-radius: 50%; background: #fff; transform: translateX(-50%); }
-.method__line--top { top: 0; }
-.method__line--bottom { bottom: 0; }
-.method__line--bottom span { top: 0; bottom: auto; }
-.method .round-button { margin-top: 54px; }
+.method .round-button { margin: 54px auto 0; }
 
 .clients { padding-bottom: 100px; }
 .review-slider { position: relative; margin-top: 60px; padding: 0 80px; }
@@ -166,9 +164,9 @@ img { display: block; max-width: 100%; }
 .contact-side h2 { margin: 0; font: 700 32px/1.25 "Gmarket Sans", sans-serif; letter-spacing: -.06em; }
 .contact-side p { margin: 20px 0 0; color: #6b6b65; line-height: 1.7; word-break: keep-all; }
 .contact-side__note { margin-top: 60px !important; padding-top: 20px; border-top: 1px solid #cfcfc8; font-size: 14px; }
-.contact-form { position: relative; width: 100%; min-width: 0; max-height: 1600px; padding: 42px; overflow: hidden; background: #fff; box-shadow: 0 0 20px rgba(0, 0, 0, .08); transition: width .45s ease, max-width .45s ease, max-height .45s ease, padding .45s ease; }
+.contact-form { position: relative; width: 100%; min-width: 0; max-height: 1600px; padding: 42px; overflow: hidden; background: #fff; box-shadow: 0 0 20px rgba(0, 0, 0, .08); transition: width .85s cubic-bezier(.22, .61, .36, 1), max-width .85s cubic-bezier(.22, .61, .36, 1), max-height .85s cubic-bezier(.22, .61, .36, 1), padding .85s cubic-bezier(.22, .61, .36, 1); }
 .contact-form::before { content: "•  컨설팅 신청서"; position: absolute; inset: 0; z-index: 2; display: flex; align-items: center; justify-content: center; color: #fff; font: 700 18px/1.3 "Gmarket Sans", sans-serif; background: var(--ink); opacity: 0; pointer-events: none; transition: opacity .25s ease; }
-.contact-form > * { position: relative; z-index: 1; opacity: 1; transform: none; transition: opacity .35s ease .2s, transform .35s ease .2s, visibility 0s linear .2s; }
+.contact-form > * { position: relative; z-index: 1; opacity: 1; transform: none; transition: opacity .6s ease .4s, transform .6s ease .4s, visibility 0s linear .4s; }
 .contact-form.is-collapsed { width: 260px; max-width: 260px; max-height: 100px; padding: 0 20px; margin-right: auto; margin-left: auto; }
 .contact-form.is-collapsed::before { opacity: 1; }
 .contact-form.is-collapsed > * { visibility: hidden; opacity: 0; transform: translateY(18px); transition-delay: 0s; }
@@ -244,6 +242,7 @@ img { display: block; max-width: 100%; }
   .hero { padding-top: 60px; }
   .hero__inner { min-height: 620px; align-content: end; }
   .hero__copy { padding: 40px 0 0; }
+  .hero__slides { padding-bottom: 14px; }
   .hero__badge { gap: 6px; margin-bottom: 10px; font-size: 20px; }
   .hero__badge img { width: 24px; }
   .hero h1 { font-size: 36px; }
@@ -267,9 +266,9 @@ img { display: block; max-width: 100%; }
   .talk-item:first-child img { margin-right: 10px; }
   .talk-item:last-child img { margin-left: 10px; }
   .talk-item p { max-width: calc(100% - 70px); padding: 15px; font-size: 13px; overflow-wrap: anywhere; }
-  .method, .method__inner { min-height: 700px; }
-  .method__inner { width: calc(100% - 40px); }
-  .method__line { height: 32vh; }
+  .method { min-height: 700px; height: 100vh; }
+  .method__inner { width: calc(100% - 40px); min-height: 0; height: 100%; }
+  .method__line { height: 50vh; }
   .method__line span { width: 10px; height: 10px; }
   .method .round-button { margin-top: 35px; }
   .review-slider { margin-top: 40px; padding: 0 50px; }

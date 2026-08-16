@@ -57,7 +57,8 @@
     const perPage = visibleReviews();
     const maxIndex = Math.max(0, reviewCards.length - perPage);
     reviewIndex = Math.min(Math.max(nextIndex, 0), maxIndex);
-    if (reviewTrack) reviewTrack.style.transform = `translateX(-${reviewIndex * (100 / perPage)}%)`;
+    const cardWidth = reviewCards[0]?.offsetWidth || 0;
+    if (reviewTrack) reviewTrack.style.transform = `translate3d(-${reviewIndex * cardWidth}px, 0, 0)`;
     reviewCards.forEach((card, index) => card.classList.toggle('is-current', index === reviewIndex));
     if (reviewPrev) reviewPrev.disabled = reviewIndex === 0;
     if (reviewNext) reviewNext.disabled = reviewIndex === maxIndex;
@@ -101,12 +102,12 @@
     if ('IntersectionObserver' in window) {
       const contactPanelObserver = new IntersectionObserver(([entry], observer) => {
         if (!entry.isIntersecting) return;
-        window.setTimeout(expandContactPanel, 250);
+        window.setTimeout(expandContactPanel, 450);
         observer.disconnect();
       }, { rootMargin: '0px 0px -15%' });
       contactPanelObserver.observe(contactPanel);
     } else {
-      window.setTimeout(expandContactPanel, 250);
+      window.setTimeout(expandContactPanel, 450);
     }
   }
 
