@@ -10,11 +10,19 @@
   <link rel="stylesheet" href="styles.css">
   <script src="script.js" defer></script>
 </head>
-<body class="contact-page">
+<body class="success-page">
   <header class="site-header" data-header>
     <div class="site-header__inner container">
       <a class="brand" href="index.html#top" aria-label="위대한유산 홈"><img src="assets/images/test-logo.svg" data-logo alt="위대한유산"></a>
-      <a class="success-home" href="index.html">홈으로</a>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-navigation">
+        <span></span><span></span><span></span><span></span>
+        <span class="sr-only">메뉴 열기</span>
+      </button>
+      <nav class="site-nav" id="site-navigation" aria-label="주요 메뉴">
+        <a href="https://class101.net/products/SZLCzfTDjW9v9QkLRdBZ" target="_blank" rel="noreferrer">클래스101</a>
+        <a href="assets/docs/company-introduction.pdf" download>회사소개서</a>
+        <a class="site-nav__cta" href="contact.html">컨설팅 신청</a>
+      </nav>
     </div>
   </header>
 
@@ -23,12 +31,16 @@
       <p class="success-card__eyebrow">CONTACT COMPLETE</p>
       <h1 id="success-title">문의가<br><span>완료되었습니다.</span></h1>
       <p class="success-card__copy">문의 내용을 담당자에게 전달했습니다.<br>빠른 시일 내에 연락드리겠습니다.</p>
-      <a class="round-button round-button--red" href="index.html"><i aria-hidden="true"></i>홈으로 돌아가기</a>
+      <a class="round-button round-button--dark" href="index.html"><i aria-hidden="true"></i>홈으로 돌아가기</a>
     </section>
   </main>
 
   <footer class="site-footer">
-    <div class="container"><p>Copyright © 2021 위대한유산 All rights reserved.</p></div>
+    <div class="container">
+      <div class="site-footer__links"><a href="contact.html">광고문의</a><span>|</span><a href="contact.html">제휴문의</a><span>|</span><a href="contact.html">강의문의</a></div>
+      <p>주식회사 위대한유산 대표 : 이예진 <span>|</span> 사업자등록번호 : 881-81-02236 <span>|</span> 서울특별시 강남구 테헤란로82길 15, 1414호(대치동, 디아이타워) <span>|</span> <a href="mailto:adverthere1@gmail.com">adverthere1@gmail.com</a></p>
+      <p>Copyright © 2021 위대한유산 All rights reserved.</p>
+    </div>
   </footer>
 </body>
 </html>
