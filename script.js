@@ -68,13 +68,33 @@
   reviewNext?.addEventListener('click', () => renderReviews(reviewIndex + 1));
   window.addEventListener('resize', () => renderReviews(reviewIndex));
 
+  const introStage = document.querySelector('.intro-scroll-stage');
+  const introSection = document.querySelector('.intro');
   const darkSection = document.querySelector('.section--dark');
+  const updateIntroPin = () => {
+    if (!introStage || !introSection || !darkSection) return;
+    const methodTop = darkSection.getBoundingClientRect().top + window.scrollY;
+    const shouldPin = window.scrollY >= methodTop - window.innerHeight && window.scrollY < methodTop;
+    introStage.classList.toggle('is-pinned', shouldPin);
+    introSection.classList.toggle('is-pinned', shouldPin);
+  };
+  if (introStage && introSection && darkSection) {
+    window.addEventListener('scroll', updateIntroPin, { passive: true });
+    window.addEventListener('resize', updateIntroPin);
+    updateIntroPin();
+  }
+
   if (darkSection && header) {
-    const headerObserver = new IntersectionObserver(([entry]) => {
-      header.classList.toggle('is-dark', entry.isIntersecting);
-      if (logo) logo.src = entry.isIntersecting ? logoLight : logoDark;
-    }, { threshold: 0.08 });
-    headerObserver.observe(darkSection);
+    const updateHeaderTheme = () => {
+      const darkRect = darkSection.getBoundingClientRect();
+      const headerHeight = header.getBoundingClientRect().height;
+      const isDark = darkRect.top <= headerHeight && darkRect.bottom > headerHeight;
+      header.classList.toggle('is-dark', isDark);
+      if (logo) logo.src = isDark ? logoLight : logoDark;
+    };
+    window.addEventListener('scroll', updateHeaderTheme, { passive: true });
+    window.addEventListener('resize', updateHeaderTheme);
+    updateHeaderTheme();
   }
 
   const revealItems = document.querySelectorAll('.reveal');
