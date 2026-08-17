@@ -20,6 +20,26 @@
   const logoLight = 'assets/images/logo-white.png';
   let heroIndex = 0;
   let reviewIndex = 0;
+  let reviewPhysicalIndex = reviewCards.length * 2;
+
+  const reviewItems = (() => {
+    if (!reviewTrack || !reviewCards.length) return [];
+
+    const cloneCards = () => reviewCards.map((card, index) => {
+      const clone = card.cloneNode(true);
+      clone.classList.remove('is-current');
+      clone.dataset.reviewIndex = String(index);
+      clone.setAttribute('aria-hidden', 'true');
+      return clone;
+    });
+
+    reviewCards.forEach((card, index) => {
+      card.dataset.reviewIndex = String(index);
+    });
+    reviewTrack.prepend(...cloneCards(), ...cloneCards());
+    reviewTrack.append(...cloneCards(), ...cloneCards());
+    return [...reviewTrack.querySelectorAll('.review-card')];
+  })();
 
   const closeMenu = () => {
     if (!menuToggle || !siteNav) return;
@@ -53,20 +73,32 @@
 
   const visibleReviews = () => window.matchMedia('(max-width: 1199px)').matches ? 1 : 3;
 
-  const renderReviews = (nextIndex) => {
+  const renderReviews = (nextPhysicalIndex, immediate = false) => {
+    if (!reviewTrack || !reviewCards.length) return;
     const perPage = visibleReviews();
-    const maxIndex = Math.max(0, reviewCards.length - perPage);
-    reviewIndex = Math.min(Math.max(nextIndex, 0), maxIndex);
-    const cardWidth = reviewCards[0]?.offsetWidth || 0;
-    if (reviewTrack) reviewTrack.style.transform = `translate3d(-${reviewIndex * cardWidth}px, 0, 0)`;
-    reviewCards.forEach((card, index) => card.classList.toggle('is-current', index === reviewIndex));
-    if (reviewPrev) reviewPrev.disabled = reviewIndex === 0;
-    if (reviewNext) reviewNext.disabled = reviewIndex === maxIndex;
+    const centerOffset = Math.floor(perPage / 2);
+    reviewPhysicalIndex = nextPhysicalIndex;
+    reviewIndex = ((reviewPhysicalIndex % reviewCards.length) + reviewCards.length) % reviewCards.length;
+    const cardWidth = reviewItems[0]?.offsetWidth || 0;
+    reviewTrack.style.transition = immediate ? 'none' : '';
+    reviewTrack.style.transform = `translate3d(-${(reviewPhysicalIndex - centerOffset) * cardWidth}px, 0, 0)`;
+    reviewItems.forEach((card, index) => card.classList.toggle('is-current', index === reviewPhysicalIndex));
+    if (reviewPrev) reviewPrev.disabled = false;
+    if (reviewNext) reviewNext.disabled = false;
+    if (immediate) window.requestAnimationFrame(() => { reviewTrack.style.transition = ''; });
   };
 
-  reviewPrev?.addEventListener('click', () => renderReviews(reviewIndex - 1));
-  reviewNext?.addEventListener('click', () => renderReviews(reviewIndex + 1));
-  window.addEventListener('resize', () => renderReviews(reviewIndex));
+  const recenterReviews = () => {
+    const centralIndex = reviewCards.length * 2 + reviewIndex;
+    if (reviewPhysicalIndex !== centralIndex) renderReviews(centralIndex, true);
+  };
+
+  reviewTrack?.addEventListener('transitionend', (event) => {
+    if (event.propertyName === 'transform') recenterReviews();
+  });
+  reviewPrev?.addEventListener('click', () => renderReviews(reviewPhysicalIndex - 1));
+  reviewNext?.addEventListener('click', () => renderReviews(reviewPhysicalIndex + 1));
+  window.addEventListener('resize', () => renderReviews(reviewPhysicalIndex, true));
 
   const introStage = document.querySelector('.intro-scroll-stage');
   const introSection = document.querySelector('.intro');
@@ -172,5 +204,5 @@
   });
 
   renderHero(0);
-  renderReviews(0);
+  renderReviews(reviewPhysicalIndex, true);
 })();
