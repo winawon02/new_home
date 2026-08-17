@@ -198,7 +198,7 @@
 
     const submitButton = contactForm.querySelector('button[type="submit"]');
     const formData = Object.fromEntries(new FormData(contactForm).entries());
-    formData._replyto = formData.email;
+    formData._replyto = formData['이메일'] || '';
     submitButton.disabled = true;
     if (contactStatus) {
       contactStatus.textContent = '문의 내용을 전송하고 있습니다.';

@@ -55,10 +55,10 @@
         <fieldset class="form-fieldset">
           <legend>문의 유형 <small>*</small></legend>
           <div class="choice-list">
-            <label class="choice"><input type="radio" name="contactType" value="종합 마케팅" required><span>종합 마케팅</span></label>
-            <label class="choice"><input type="radio" name="contactType" value="바이럴 마케팅"><span>바이럴 마케팅</span></label>
-            <label class="choice"><input type="radio" name="contactType" value="퍼포먼스 마케팅"><span>퍼포먼스 마케팅</span></label>
-            <label class="choice"><input type="radio" name="contactType" value="기타 문의"><span>기타 문의</span></label>
+            <label class="choice"><input type="radio" name="문의 유형" value="종합 마케팅" required><span>종합 마케팅</span></label>
+            <label class="choice"><input type="radio" name="문의 유형" value="바이럴 마케팅"><span>바이럴 마케팅</span></label>
+            <label class="choice"><input type="radio" name="문의 유형" value="퍼포먼스 마케팅"><span>퍼포먼스 마케팅</span></label>
+            <label class="choice"><input type="radio" name="문의 유형" value="기타 문의"><span>기타 문의</span></label>
           </div>
         </fieldset>
 
@@ -66,19 +66,19 @@
           <div class="form-grid">
             <div class="form-field">
               <label class="form-label" for="contact-company">회사명(업종) <small>*</small></label>
-              <input class="form-control" id="contact-company" name="contactCoop" type="text" placeholder="회사명 또는 업종을 입력해주세요" required>
+              <input class="form-control" id="contact-company" name="회사명(업종)" type="text" placeholder="회사명 또는 업종을 입력해주세요" required>
             </div>
             <div class="form-field">
               <label class="form-label" for="contact-name">담당자명 <small>*</small></label>
-              <input class="form-control" id="contact-name" name="contactNm" type="text" placeholder="이름을 입력해주세요" required>
+              <input class="form-control" id="contact-name" name="담당자명" type="text" placeholder="이름을 입력해주세요" required>
             </div>
             <div class="form-field">
               <label class="form-label" for="contact-tel">연락처 <small>*</small></label>
-              <input class="form-control" id="contact-tel" name="contactTel" type="tel" inputmode="tel" placeholder="010-0000-0000" required>
+              <input class="form-control" id="contact-tel" name="연락처" type="tel" inputmode="tel" placeholder="010-0000-0000" required>
             </div>
             <div class="form-field">
               <label class="form-label" for="contact-email">이메일 <small>*</small></label>
-              <input class="form-control" id="contact-email" name="email" type="email" placeholder="답변받을 이메일을 입력해주세요" required>
+              <input class="form-control" id="contact-email" name="이메일" type="email" placeholder="답변받을 이메일을 입력해주세요" required>
             </div>
           </div>
         </fieldset>
@@ -86,15 +86,15 @@
         <fieldset class="form-fieldset form-fieldset--inline">
           <legend>현재 마케팅 진행 여부</legend>
           <div class="choice-list">
-            <label class="choice"><input type="radio" name="contactAd" value="진행 중"><span>진행 중</span></label>
-            <label class="choice"><input type="radio" name="contactAd" value="진행 전"><span>진행 전</span></label>
-            <label class="choice"><input type="radio" name="contactAd" value="중단 상태"><span>중단 상태</span></label>
+            <label class="choice"><input type="radio" name="현재 마케팅 진행 여부" value="진행 중"><span>진행 중</span></label>
+            <label class="choice"><input type="radio" name="현재 마케팅 진행 여부" value="진행 전"><span>진행 전</span></label>
+            <label class="choice"><input type="radio" name="현재 마케팅 진행 여부" value="중단 상태"><span>중단 상태</span></label>
           </div>
         </fieldset>
 
         <div class="form-field form-field--full form-field--inline">
           <label class="form-label" for="contact-budget">월 마케팅 예산</label>
-          <select class="form-control" id="contact-budget" name="contactBudget">
+          <select class="form-control" id="contact-budget" name="월 마케팅 예산">
             <option value="">선택해주세요</option>
             <option value="월 100만원 미만">월 100만원 미만</option>
             <option value="월 100~300만원">월 100~300만원</option>
@@ -105,10 +105,10 @@
 
         <div class="form-field form-field--full form-field--message">
           <label class="form-label" for="contact-message">문의 내용 <small>*</small></label>
-          <textarea class="form-control form-control--memo" id="contact-message" name="contactMemo" maxlength="200" placeholder="문의하실 내용을 작성해주세요" required></textarea>
+          <textarea class="form-control form-control--memo" id="contact-message" name="문의 내용" maxlength="200" placeholder="문의하실 내용을 작성해주세요" required></textarea>
         </div>
 
-        <label class="form-agree"><input type="checkbox" name="privacyConsent" value="동의" required><span>개인정보 수집 및 이용에 동의합니다. 입력한 정보는 문의 응대 목적으로만 사용됩니다.</span></label>
+        <label class="form-agree"><input type="checkbox" name="개인정보 수집 및 이용 동의" value="동의" required><span>개인정보 수집 및 이용에 동의합니다. 입력한 정보는 문의 응대 목적으로만 사용됩니다.</span></label>
         <div class="form-submit"><button class="round-button round-button--dark" type="submit"><i aria-hidden="true"></i>신청하기</button></div>
         <p class="form-status" data-contact-status role="status" aria-live="polite"></p>
       </form>
