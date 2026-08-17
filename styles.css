@@ -171,6 +171,7 @@ img { display: block; max-width: 100%; }
 .contact-intro h1 span { position: relative; display: inline-block; padding: 0 10px; }
 .contact-intro h1 span::after { content: ""; position: absolute; right: 2%; bottom: 0; left: auto; z-index: -1; width: 0; height: 25px; background: var(--red); animation: hero-line-wipe 3s infinite; }
 .contact-intro p { margin: 24px 0 0; color: #606060; font-size: 18px; }
+.contact-intro .section-heading__point { margin-bottom: 32px; }
 .contact-form-wrap { display: grid; grid-template-columns: .7fr 1.3fr; gap: 70px; align-items: start; min-width: 0; }
 .contact-side h2 { margin: 0; font: 700 32px/1.25 "Gmarket Sans", sans-serif; letter-spacing: -.06em; }
 .contact-side p { margin: 20px 0 0; color: #6b6b65; line-height: 1.7; word-break: keep-all; }
@@ -316,6 +317,7 @@ img { display: block; max-width: 100%; }
   .contact-intro h1 { font-size: 44px; }
   .contact-intro h1 span::after { right: -8px; left: -8px; height: 13px; }
   .contact-intro p { font-size: 14px; }
+  .contact-intro .section-heading__point { margin-bottom: 24px; }
   .contact-form-wrap { display: block; }
   .contact-side { margin-bottom: 35px; }
   .contact-side h2 { font-size: 26px; }

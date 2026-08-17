@@ -92,6 +92,7 @@
       const target = reviewTrack.children[centerOffset + 1];
       setCurrentReview(target);
       reviewTrack.style.transform = `translate3d(-${cardWidth}px, 0, 0)`;
+      window.setTimeout(finishReview, 500);
       return;
     }
 
@@ -104,10 +105,11 @@
       reviewTrack.style.transition = '';
       reviewTrack.style.transform = 'translate3d(0, 0, 0)';
     });
+    window.setTimeout(finishReview, 500);
   };
 
-  reviewTrack?.addEventListener('transitionend', (event) => {
-    if (event.propertyName !== 'transform' || !reviewMoving) return;
+  const finishReview = () => {
+    if (!reviewMoving || !reviewTrack) return;
     reviewMoving = false;
     if (reviewDirection > 0 && reviewTrack.children.length) reviewTrack.append(reviewTrack.firstElementChild);
     reviewTrack.style.transition = 'none';
@@ -115,7 +117,7 @@
     window.requestAnimationFrame(() => {
       reviewTrack.style.transition = '';
     });
-  });
+  };
   reviewPrev?.addEventListener('click', () => animateReview(-1));
   reviewNext?.addEventListener('click', () => animateReview(1));
   window.addEventListener('resize', () => arrangeReviews(reviewIndex));
