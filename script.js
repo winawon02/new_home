@@ -20,26 +20,8 @@
   const logoLight = 'assets/images/logo-white.png';
   let heroIndex = 0;
   let reviewIndex = 0;
-  let reviewPhysicalIndex = reviewCards.length * 2;
-
-  const reviewItems = (() => {
-    if (!reviewTrack || !reviewCards.length) return [];
-
-    const cloneCards = () => reviewCards.map((card, index) => {
-      const clone = card.cloneNode(true);
-      clone.classList.remove('is-current');
-      clone.dataset.reviewIndex = String(index);
-      clone.setAttribute('aria-hidden', 'true');
-      return clone;
-    });
-
-    reviewCards.forEach((card, index) => {
-      card.dataset.reviewIndex = String(index);
-    });
-    reviewTrack.prepend(...cloneCards(), ...cloneCards());
-    reviewTrack.append(...cloneCards(), ...cloneCards());
-    return [...reviewTrack.querySelectorAll('.review-card')];
-  })();
+  let reviewMoving = false;
+  let reviewDirection = 0;
 
   const closeMenu = () => {
     if (!menuToggle || !siteNav) return;
@@ -73,32 +55,70 @@
 
   const visibleReviews = () => window.matchMedia('(max-width: 1199px)').matches ? 1 : 3;
 
-  const renderReviews = (nextPhysicalIndex, immediate = false) => {
+  const setCurrentReview = (card) => {
+    reviewCards.forEach((item) => item.classList.toggle('is-current', item === card));
+    reviewIndex = Number(card?.dataset.reviewIndex || 0);
+  };
+
+  const arrangeReviews = (nextIndex = reviewIndex, immediate = true) => {
     if (!reviewTrack || !reviewCards.length) return;
     const perPage = visibleReviews();
     const centerOffset = Math.floor(perPage / 2);
-    reviewPhysicalIndex = nextPhysicalIndex;
-    reviewIndex = ((reviewPhysicalIndex % reviewCards.length) + reviewCards.length) % reviewCards.length;
-    const cardWidth = reviewItems[0]?.offsetWidth || 0;
+    reviewCards.forEach((card, index) => { card.dataset.reviewIndex = String(index); });
+    reviewIndex = ((nextIndex % reviewCards.length) + reviewCards.length) % reviewCards.length;
+    const orderedCards = Array.from({ length: reviewCards.length }, (_, index) => {
+      const logicalIndex = (reviewIndex - centerOffset + index + reviewCards.length) % reviewCards.length;
+      return reviewCards[logicalIndex];
+    });
+    reviewTrack.innerHTML = '';
+    reviewTrack.append(...orderedCards);
+    setCurrentReview(orderedCards[centerOffset]);
     reviewTrack.style.transition = immediate ? 'none' : '';
-    reviewTrack.style.transform = `translate3d(-${(reviewPhysicalIndex - centerOffset) * cardWidth}px, 0, 0)`;
-    reviewItems.forEach((card, index) => card.classList.toggle('is-current', index === reviewPhysicalIndex));
+    reviewTrack.style.transform = 'translate3d(0, 0, 0)';
     if (reviewPrev) reviewPrev.disabled = false;
     if (reviewNext) reviewNext.disabled = false;
     if (immediate) window.requestAnimationFrame(() => { reviewTrack.style.transition = ''; });
   };
 
-  const recenterReviews = () => {
-    const centralIndex = reviewCards.length * 2 + reviewIndex;
-    if (reviewPhysicalIndex !== centralIndex) renderReviews(centralIndex, true);
+  const animateReview = (direction) => {
+    if (!reviewTrack || reviewMoving || !reviewCards.length) return;
+    const perPage = visibleReviews();
+    const centerOffset = Math.floor(perPage / 2);
+    const cardWidth = reviewTrack.children[0]?.offsetWidth || 0;
+    reviewMoving = true;
+    reviewDirection = direction;
+
+    if (direction > 0) {
+      const target = reviewTrack.children[centerOffset + 1];
+      setCurrentReview(target);
+      reviewTrack.style.transform = `translate3d(-${cardWidth}px, 0, 0)`;
+      return;
+    }
+
+    const lastCard = reviewTrack.lastElementChild;
+    if (lastCard) reviewTrack.prepend(lastCard);
+    reviewTrack.style.transition = 'none';
+    reviewTrack.style.transform = `translate3d(-${cardWidth}px, 0, 0)`;
+    setCurrentReview(reviewTrack.children[centerOffset]);
+    window.requestAnimationFrame(() => {
+      reviewTrack.style.transition = '';
+      reviewTrack.style.transform = 'translate3d(0, 0, 0)';
+    });
   };
 
   reviewTrack?.addEventListener('transitionend', (event) => {
-    if (event.propertyName === 'transform') recenterReviews();
+    if (event.propertyName !== 'transform' || !reviewMoving) return;
+    reviewMoving = false;
+    if (reviewDirection > 0 && reviewTrack.children.length) reviewTrack.append(reviewTrack.firstElementChild);
+    reviewTrack.style.transition = 'none';
+    reviewTrack.style.transform = 'translate3d(0, 0, 0)';
+    window.requestAnimationFrame(() => {
+      reviewTrack.style.transition = '';
+    });
   });
-  reviewPrev?.addEventListener('click', () => renderReviews(reviewPhysicalIndex - 1));
-  reviewNext?.addEventListener('click', () => renderReviews(reviewPhysicalIndex + 1));
-  window.addEventListener('resize', () => renderReviews(reviewPhysicalIndex, true));
+  reviewPrev?.addEventListener('click', () => animateReview(-1));
+  reviewNext?.addEventListener('click', () => animateReview(1));
+  window.addEventListener('resize', () => arrangeReviews(reviewIndex));
 
   const introStage = document.querySelector('.intro-scroll-stage');
   const introSection = document.querySelector('.intro');
@@ -204,5 +224,5 @@
   });
 
   renderHero(0);
-  renderReviews(reviewPhysicalIndex, true);
+  arrangeReviews(0);
 })();
