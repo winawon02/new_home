@@ -96,7 +96,9 @@
     contactPanel.classList.add('is-collapsed');
     const expandContactPanel = () => {
       contactPanel.classList.remove('is-collapsed');
-      contactPanel.classList.add('is-expanded');
+      contactPanel.classList.add('is-width-expanded', 'is-expanded');
+      window.setTimeout(() => contactPanel.classList.add('is-height-expanded'), 600);
+      window.setTimeout(() => contactPanel.classList.add('is-content-visible'), 1450);
     };
 
     if ('IntersectionObserver' in window) {
