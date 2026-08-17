@@ -10,7 +10,7 @@
 :root { --ink: #141414; --red: #d11f1f; --light-red: #ff2828; --ivory: #f2f2eb; --line: #dcdcdc; --muted: #a2a298; --max-width: 1400px; }
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
-body { margin: 0; overflow-x: hidden; color: var(--ink); background: #fff; font-family: "Pretendard", sans-serif; font-size: 16px; line-height: 1.5; -webkit-font-smoothing: antialiased; }
+body { margin: 0; overflow-x: hidden; color: var(--ink); background: #fff; font-family: "Pretendard", sans-serif; font-size: 16px; line-height: 1.5; word-break: keep-all; -webkit-font-smoothing: antialiased; }
 body.menu-open { overflow: hidden; }
 a { color: inherit; text-decoration: none; }
 button { color: inherit; font: inherit; }
@@ -86,9 +86,10 @@ img { display: block; max-width: 100%; }
   70% { right: 2%; width: 0; }
   100% { right: 2%; width: 0; }
 }
-@keyframes method-highlight-wipe {
-  from { transform: scaleX(0); }
-  to { transform: scaleX(1); }
+@keyframes method-highlight-loop {
+  0%, 18% { transform: scaleX(0); }
+  48%, 72% { transform: scaleX(1); }
+  100% { transform: scaleX(0); }
 }
 
 .slogan { overflow: hidden; margin-top: 50px; color: #f2f2f2; white-space: nowrap; }
@@ -112,7 +113,7 @@ img { display: block; max-width: 100%; }
 .talk-item img { width: 140px; }
 .talk-item:first-child img { margin-right: 20px; }
 .talk-item:last-child img { margin-left: 20px; }
-.talk-item p { margin: 0; padding: 20px; border-radius: 10px; box-shadow: 0 0 15px rgba(0, 0, 0, .1); font-size: 22px; font-weight: 400; line-height: 1.4; }
+.talk-item p { margin: 0; padding: 20px; border-radius: 10px; box-shadow: 0 0 15px rgba(0, 0, 0, .1); font-size: 22px; font-weight: 400; line-height: 1.4; overflow-wrap: normal; }
 .talk-item em { font-style: normal; font-weight: 700; }
 
 .section--dark { position: relative; overflow: hidden; color: #fff; background: var(--ink); }
@@ -123,7 +124,7 @@ img { display: block; max-width: 100%; }
 .section-heading--dark h2 span::after { background: var(--red); }
 .method .section-heading--dark { padding-top: 40px; }
 .method .section-heading--dark h2 span::after { transform: scaleX(0); transform-origin: right center; }
-.method .section-heading--dark.is-visible h2 span::after { animation: method-highlight-wipe .9s cubic-bezier(.22, .61, .36, 1) .15s both; }
+.method .section-heading--dark.is-visible h2 span::after { animation: method-highlight-loop 3.4s cubic-bezier(.22, .61, .36, 1) .15s infinite; }
 .section-heading--dark .section-heading__copy { color: #c8c8c8; font-weight: 300; }
 .method__line { position: relative; width: 1px; height: 50vh; margin: 0 auto; background: rgba(255, 255, 255, .2); }
 .method__line span { position: absolute; bottom: 0; left: 50%; width: 16px; height: 16px; border-radius: 50%; background: #fff; transform: translateX(-50%); }
@@ -269,7 +270,7 @@ img { display: block; max-width: 100%; }
   .hero__badge img { width: 24px; }
   .hero h1 { font-size: 34px; letter-spacing: -.08em; }
   .hero h1 span::after { bottom: -6px; height: 2px; }
-  .hero__visual { width: 70vw; margin: 0 0 0 auto; }
+  .hero__visual { width: 70vw; margin: 24px 0 0 auto; }
   .round-button { width: 220px; height: 52px; font-size: 18px; }
   .round-button--dark { margin-top: 30px; }
   .hero__pager { bottom: 0; }
@@ -287,7 +288,7 @@ img { display: block; max-width: 100%; }
   .talk-item img { width: 60px; }
   .talk-item:first-child img { margin-right: 10px; }
   .talk-item:last-child img { margin-left: 10px; }
-  .talk-item p { max-width: calc(100% - 70px); padding: 15px; font-size: 13px; overflow-wrap: anywhere; }
+  .talk-item p { max-width: calc(100% - 70px); padding: 15px; font-size: 13px; overflow-wrap: normal; }
   .method { min-height: 700px; height: 100vh; }
   .method__inner { width: calc(100% - 40px); min-height: 0; height: 100%; }
   .method__line { height: 50vh; }
@@ -311,7 +312,7 @@ img { display: block; max-width: 100%; }
   .intro-scroll-stage { min-height: 100vh; }
   .intro { height: 100vh; min-height: 100vh; }
   .contact-main { padding: 60px 0 80px; }
-  .contact-intro { padding: 70px 0 40px; }
+  .contact-intro { height: calc(100vh - 60px); min-height: calc(100vh - 60px); padding: 70px 0 40px; }
   .contact-intro h1 { font-size: 44px; }
   .contact-intro h1 span::after { right: -8px; left: -8px; height: 13px; }
   .contact-intro p { font-size: 14px; }
